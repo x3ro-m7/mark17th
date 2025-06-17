@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gun Rain</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .gun {
+      position: absolute;
+      width: 60px;
+      animation: fall 2.5s linear forwards;
+      opacity: 0;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const numberOfGuns = 10;
+    const delaySpread = 1000; // milliseconds
+
+    for (let i = 0; i < numberOfGuns; i++) {
+      const gun = document.createElement("img");
+      gun.src = "gun.png"; // تأكدي أن اسم الصورة صحيح وأنها شفافة
+      gun.className = "gun";
+
+      // توزيع عشوائي أفقي
+      gun.style.left = Math.random() * 100 + "vw";
+      // تأخير عشوائي
+      gun.style.animationDelay = Math.random() * delaySpread + "ms";
+
+      document.body.appendChild(gun);
+
+      // إزالة العنصر بعد انتهاء الحركة
+      gun.addEventListener("animationend", () => {
+        gun.remove();
+      });
+    }
+  </script>
+</body>
+</html>
